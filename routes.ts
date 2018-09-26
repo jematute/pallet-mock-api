@@ -7,6 +7,13 @@ export class Routes {
             res.status(200).send({
                 message: 'GET request successfulll!!!!!'
             })
-        })               
+        });
+        
+        app.route('/start')
+        .get((req: Request, res: Response) => {
+            res.status(200).send({
+                message: { name: "Juan", last: "Matute" }
+            });
+        });
     }
 }

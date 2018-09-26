@@ -18,10 +18,12 @@ wss.on('connection', (ws: WebSocket) => {
         console.log('received: %s', message);
         ws.send(`Hello, you sent -> ${message}`);
     });
-
+    
     //send immediatly a feedback to the incoming connection    
-    ws.send('Hi there, I am a WebSocket server');
+    ws.send(JSON.stringify({ message: "Hello", type: 0 }));
 });
+
+
 
 //start our server
 server.listen(PORT, () => {
