@@ -9,11 +9,16 @@ export class Routes {
             })
         });
         
-        app.route('/start')
+        app.route('/start-pallet-scan')
         .get((req: Request, res: Response) => {
-            res.status(200).send({
-                message: { name: "Juan", last: "Matute" }
-            });
+            console.log(`start sent by ${req.query.userId}`);
+            res.status(200).send(true);
+        });
+
+        app.route('/stop-pallet-scan')
+        .get((req: Request, res: Response) => {
+            console.log(`stop sent by ${req.query.userId}`);
+            res.status(200).send(true);
         });
     }
 }
