@@ -3,15 +3,22 @@ import * as WebSocket from 'ws';
 import * as http from 'http';
 import { EventService } from "./event-service";
 import { ClientSettings } from "./client-settings";
+import { ClientService } from "./client-service";
 
 //initialize a simple http server
 const server = http.createServer(app);
 const PORT = "3000";
+
+//start the random event stream
 const eventService = new EventService();
+eventService.generateRandomEvent();
 
 //initialize the WebSocket server instance
 const wss = new WebSocket.Server({ server });
+//get application singletons
 const settings = ClientSettings.getInstance(); 
+const clientService = ClientService.getInstance();
+
 
 wss.on('connection', (ws: WebSocket) => {
 
@@ -27,12 +34,11 @@ wss.on('connection', (ws: WebSocket) => {
     ws.send(JSON.stringify({ message: "Hello", type: 0 }));
 });
 
-eventService.getMessages().subscribe(message => {
+clientService.onMessage.subscribe(message => {
     wss.clients.forEach(client => {
         client.send(JSON.stringify({ message }));
-    })
+    });
 });
-
 
 //start our server
 server.listen(PORT, () => {
