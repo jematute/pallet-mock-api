@@ -27,6 +27,16 @@ export class DataService {
 
     getCaseData() {
         let obj = JSON.parse(fs.readFileSync('data/case-data.json', 'utf8')) as Case[];
+        obj.unshift({ 
+            barcode: 12345789,
+            status: "New",
+            loadId: 12345,
+            palletStatus: "good",
+            palletId: 123456,
+            user: "juan",
+            manualWrap: "juan"
+         });
+         fs.writeFileSync('data/case-data.json', JSON.stringify(obj), 'utf8');
         return obj;
     }
 

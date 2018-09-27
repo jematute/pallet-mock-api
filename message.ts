@@ -1,9 +1,6 @@
-export interface ServerMessage {
-    type: MessageType,
-    message: string,
-}
+import { Screens } from "./screens";
 
-export enum MessageType {
-    GETCASEDATA,
-    GETALARMDATA,
+export interface ServerMessage {
+    screen: Screens,
+    message: string,
 }

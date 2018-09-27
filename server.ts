@@ -29,7 +29,7 @@ wss.on('connection', (ws: WebSocket) => {
 
 eventService.getMessages().subscribe(message => {
     wss.clients.forEach(client => {
-        client.send(JSON.stringify({ user: settings.userId, message: message }));
+        client.send(JSON.stringify({ message }));
     })
 });
 

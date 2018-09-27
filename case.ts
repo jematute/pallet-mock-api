@@ -1,5 +1,5 @@
 export interface Case {
-    barcode: string,
+    barcode: number,
     status: string,
     loadId: number,
     palletStatus: string,

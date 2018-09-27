@@ -2,7 +2,8 @@ import {Request, Response} from "express";
 import { DataService } from "./data-service";
 import { ClientSettings  } from './client-settings';
 
-export class Routes {       
+export class Routes {
+    clientSettings = ClientSettings.getInstance();
     public routes(app): void {          
         app.route('/')
         .get((req: Request, res: Response) => {            
@@ -31,6 +32,7 @@ export class Routes {
 
         app.route('/update-status')
         .get((req: Request, res: Response) => {
+            this.clientSettings.currentScreen =  req.query.screen;
             console.log(`ui status - current-screen: ${req.query.screen}`);
             res.status(200).send(true);
         });
@@ -45,9 +47,9 @@ export class Routes {
 
         app.route('/test')
         .get((req: Request, res: Response) => {
-            const clientSettings = ClientSettings.getInstance();
-            clientSettings.userId = req.query.user;
-            res.status(200).send(JSON.stringify(clientSettings));
+            
+            this.clientSettings.userId = req.query.user;
+            res.status(200).send(JSON.stringify(this.clientSettings));
         });
 
     }
