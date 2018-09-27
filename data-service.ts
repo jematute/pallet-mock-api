@@ -26,10 +26,11 @@ export class DataService {
     }
 
     getCaseData() {
+        const status = Math.floor(Math.random() * (2 - 0)) + 0;
         let obj = JSON.parse(fs.readFileSync('data/case-data.json', 'utf8')) as Case[];
         obj.unshift({ 
             barcode: Math.floor(Math.random() * (500000 - 30000)) + 0,
-            status: "Good",
+            status: ["Good", "Failed"][status],
             loadId: Math.floor(Math.random() * (10000 - 3000)) + 0,
             palletStatus: "good",
             palletId: Math.floor(Math.random() * (5000 - 1500)) + 0,
