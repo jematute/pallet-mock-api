@@ -1,4 +1,6 @@
 import {Request, Response} from "express";
+import { DataService } from "./data-service";
+import { Screens } from "./screens";
 
 export class Routes {       
     public routes(app): void {          
@@ -20,5 +22,26 @@ export class Routes {
             console.log(`stop sent by ${req.query.userId}`);
             res.status(200).send(true);
         });
+
+        app.route('/change-screen')
+        .get((req: Request, res: Response) => {
+            console.log(`screen changed to: ${req.query.screen}`);
+            res.status(200).send(true);
+        });
+
+        app.route('/update-status')
+        .get((req: Request, res: Response) => {
+            console.log(`ui status - current-screen: ${req.query.screen}`);
+            res.status(200).send(true);
+        });
+
+        app.route('/screen-data')
+        .get((req: Request, res: Response) => {
+            const dataService = new DataService();
+            const data = dataService.getData(req.query.screen);
+            console.log(`get-screen-data screen: ${req.query.screen}`);
+            res.status(200).send(JSON.stringify(data));
+        });
+
     }
 }

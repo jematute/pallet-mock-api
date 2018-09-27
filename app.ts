@@ -25,7 +25,6 @@ class App {
             next();
         })
     }
-
 }
 
 export default new App().app;
