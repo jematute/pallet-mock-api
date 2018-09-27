@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import { DataService } from "./data-service";
-import { Screens } from "./screens";
+import { ClientSettings  } from './client-settings';
 
 export class Routes {       
     public routes(app): void {          
@@ -41,6 +41,13 @@ export class Routes {
             const data = dataService.getData(req.query.screen);
             console.log(`get-screen-data screen: ${req.query.screen}`);
             res.status(200).send(JSON.stringify(data));
+        });
+
+        app.route('/test')
+        .get((req: Request, res: Response) => {
+            const clientSettings = ClientSettings.getInstance();
+            clientSettings.userId = req.query.user;
+            res.status(200).send(JSON.stringify(clientSettings));
         });
 
     }

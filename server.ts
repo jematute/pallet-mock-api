@@ -2,6 +2,7 @@ import app from "./app";
 import * as WebSocket from 'ws';
 import * as http from 'http';
 import { EventService } from "./event-service";
+import { ClientSettings } from "./client-settings";
 
 //initialize a simple http server
 const server = http.createServer(app);
@@ -10,6 +11,7 @@ const eventService = new EventService();
 
 //initialize the WebSocket server instance
 const wss = new WebSocket.Server({ server });
+const settings = ClientSettings.getInstance(); 
 
 wss.on('connection', (ws: WebSocket) => {
 
@@ -27,7 +29,7 @@ wss.on('connection', (ws: WebSocket) => {
 
 eventService.getMessages().subscribe(message => {
     wss.clients.forEach(client => {
-        client.send(JSON.stringify(message));
+        client.send(JSON.stringify({ user: settings.userId, message: message }));
     })
 });
 
