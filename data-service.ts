@@ -28,11 +28,11 @@ export class DataService {
     getCaseData() {
         let obj = JSON.parse(fs.readFileSync('data/case-data.json', 'utf8')) as Case[];
         obj.unshift({ 
-            barcode: 12345789,
-            status: "New",
-            loadId: 12345,
+            barcode: Math.floor(Math.random() * (500000 - 30000)) + 0,
+            status: "Good",
+            loadId: Math.floor(Math.random() * (10000 - 3000)) + 0,
             palletStatus: "good",
-            palletId: 123456,
+            palletId: Math.floor(Math.random() * (5000 - 1500)) + 0,
             user: "juan",
             manualWrap: "juan"
          });
