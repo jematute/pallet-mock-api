@@ -17,9 +17,10 @@ export class EventService {
     generateRandomEvent() {
         const screens = ['/home', '/case-history', '/alarm-history', '/io-monitor', '/user-setup'];
         interval(3000).pipe(map(() => {
-            const type = Math.floor(Math.random() * (5 - 0)) + 0;
-            const message: ServerMessage = { message: "Update data", screen: screens[type] as Screens };
-            clientService.sendGenericMessage(type, message);
+            clientService.sendMessage("userupdate");
+            // const type = Math.floor(Math.random() * (5 - 0)) + 0;
+            // const message: ServerMessage = { message: "Update data", screen: screens[type] as Screens };
+            // clientService.sendGenericMessage(type, message);
         })).subscribe();
     }
 

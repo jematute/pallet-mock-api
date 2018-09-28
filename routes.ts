@@ -52,5 +52,23 @@ export class Routes {
             res.status(200).send(JSON.stringify(this.clientSettings));
         });
 
+        app.route('/eventuserlogin')
+        .get((req: Request, res: Response) => {
+            
+            console.log(req.query);
+            
+        });
+
+
+        app.route('/getlogindata')
+        .get((req: Request, res: Response) => {
+            
+            res.status(200).send(JSON.stringify({ data: "fromtheserver", textColor: "green", backgroundColor: "white" }));
+            
+        });
+
+
+        
+
     }
 }

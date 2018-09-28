@@ -26,5 +26,9 @@ export class ClientService {
     sendGenericMessage(type: UpdateType, message: any) {
         this.onMessage.next({ type: type, data: message });
     }
+
+    sendMessage(message: any) {
+        this.onMessage.next(message);
+    }
     
 }
