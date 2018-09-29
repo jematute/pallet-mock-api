@@ -7,7 +7,7 @@ import { ClientService } from "./client-service";
 
 //initialize a simple http server
 const server = http.createServer(app);
-const PORT = "3000";
+const PORT = "3001";
 
 //start the random event stream
 const eventService = new EventService();
