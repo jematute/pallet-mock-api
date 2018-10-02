@@ -12,15 +12,95 @@ export class EventService {
         
     }
 
-
-
     generateRandomEvent() {
-        const screens = ['/home', '/case-history', '/alarm-history', '/io-monitor', '/user-setup'];
+        const updates = [];
+        updates.push({
+            type: 'userupdate',
+            data: "Bill", 
+            textColor: "rgb(190,24,65)", 
+            backgroundColor: "rgb(0,0,0)"
+        });
+        updates.push({
+            type: 'casedataupdate'
+        });
+
+        updates.push({
+            type: 'casehistoryupdate'
+        });
+        
+        updates.push({
+            type: 'palletscanupdate',
+            textColor: 'rgb(190,24,65)',
+            backgroundColor: 'rgb(255,255,255)',
+            data: 'fromserver'
+        });
+
+        updates.push({
+            type: 'palletstatusupdate',
+            textColor: 'rgb(190,24,65)',
+            backgroundColor: 'rgb(255,255,255)',
+            data: 'fromserver'
+        });
+
+        updates.push({
+            type: 'palletidupdate',
+            textColor: 'rgb(190,24,65)',
+            backgroundColor: 'rgb(255,255,255)',
+            data: 'fromserver'
+        });
+
+        updates.push({
+            type: 'wrapenableupdate',
+            textColor: 'rgb(190,24,65)',
+            backgroundColor: 'rgb(89,255,30)',
+            data: 'fromserver'
+        });
+
+        updates.push({
+            type: 'systemstatusupdate',
+            data: 'Ready (from server)',
+            textColor: 'rgb(255,255,255)',
+            backgroundColor: 'rgb(144,75,133)'
+        });
+
+        updates.push({
+            type: 'startbuttonupdate',
+            data: 'Start Scan(S)',
+            textColor: 'rgb(255,255,255)',
+            backgroundColor: 'green',
+            borderColor: 'black'
+        });
+
+        updates.push({
+            type: 'stopbuttonupdate',
+            data: 'Stop Scan(S)',
+            textColor: 'rgb(0,0,0)',
+            backgroundColor: 'red',
+            borderColor: 'black'
+        });
+
+        updates.push({
+            type: 'alarmgridupdate'
+        });
+
+        updates.push({
+            type: 'alarmhistorygridupdate'
+        });
+
+        updates.push({
+            type: 'iodataupdate'
+        });
+
+        updates.push({
+            type: 'usersetupupdate'
+        })
+
+        const min = 0;
+        const max = updates.length;
+
         interval(3000).pipe(map(() => {
-            clientService.sendMessage({ type: "userupdate" });
-            // const type = Math.floor(Math.random() * (5 - 0)) + 0;
-            // const message: ServerMessage = { message: "Update data", screen: screens[type] as Screens };
-            // clientService.sendGenericMessage(type, message);
+            const type = Math.floor(Math.random() * (max - min)) + min;
+            clientService.sendMessage(updates[type]);
         })).subscribe();
     }
 
